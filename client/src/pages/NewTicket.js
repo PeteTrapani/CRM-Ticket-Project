@@ -4,13 +4,16 @@ import styled from "styled-components";
 import { Button, Error, FormField, Input, Label} from "../styles";
 import TextArea from "../styles/TextArea";
 
-function NewTicket({ user }) {
+
+
+function NewTicket({ user, addTicket }) {
   const [title, setTitle] = useState("Enter Ticket");
   const [issue, setIssue] = useState(
   
 
 
   );
+  
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
@@ -18,25 +21,29 @@ function NewTicket({ user }) {
 function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    fetch("/recipes", {
+    console.log(title, issue)
+    fetch("/tickets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         title,
-        issue,
+        issue
+        
       }),
     }).then((r) => {
       setIsLoading(false);
       if (r.ok) {
-        history.push("/");
+        r.json().then((data) => {
+          addTicket(data)
+          window.location.reload();
+        })
       } else {
         r.json().then((err) => setErrors(err.errors));
       }
-})};
-  
-
+    });
+}
   return (
     <Wrapper>
       <WrapperChild>
@@ -56,7 +63,7 @@ function handleSubmit(e) {
             <Label htmlFor="issue">Issue</Label>
             <TextArea
               id="issue"
-              rows="10"
+              rows="5"
               value={issue}
               onChange={(e) => setIssue(e.target.value)}
               required
@@ -68,7 +75,7 @@ function handleSubmit(e) {
             </Button>
           </FormField>
           <FormField>
-            {errors.map((err) => (
+            {errors?.map((err) => (
               <Error key={err}>{err}</Error>
             ))}
           </FormField>

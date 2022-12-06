@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Button } from "../styles";
 
 function NavBar({ user, setUser }) {
+
+  
   function handleLogoutClick() {
     fetch("/logout", { method: "DELETE" }).then((r) => {
       if (r.ok) {
@@ -21,6 +23,10 @@ function NavBar({ user, setUser }) {
         <Button as={Link} to="/new">
           New Ticket
         </Button>
+        <div>
+          <h1>Tickets</h1>
+          
+        </div>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>

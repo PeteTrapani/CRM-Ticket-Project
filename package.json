@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "axios": "^1.2.0",
+    "babel-plugin-styled-components": "^2.0.7",
     "react-markdown": "^8.0.3",
-    "ruby": "^0.6.1"
+    "ruby": "^0.6.1",
+    "styled-components": "^5.3.6"
   }
 }

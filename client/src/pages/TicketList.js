@@ -1,31 +1,46 @@
 import { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Box, Button } from "../styles";
+import axios from "axios";
+import Tickets from "../components/tickets";
+
+const API_URL = "http://localhost:4000/api/v1/tickets";
+
+function getAPIData() {
+  return axios.get(API_URL).then((r) => r.data)
+}
 
 function TicketList() {
-  const [recipes, setRecipes] = useState([]);
+  const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    fetch("/recipes")
+    fetch("http://localhost:4000/api/v1/tickets")
       .then((r) => r.json())
-      .then(setRecipes);
+      .then(setTickets);
   }, []);
+
+  
+
+  useEffect(() => {
+    let mounted = true;
+    getAPIData().then((items) => {
+      if (mounted) {
+        setTickets(items)
+      }
+      })
+      return () => (mounted = false);
+    }, []);
 
   return (
     <Wrapper>
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => (
-          <Recipe key={recipe.id}>
+      {tickets.length > 0 ? (
+        tickets.map((ticket) => (
+          <Ticket key={ticket.id}>
             <Box>
-              <h2>{recipe.title}</h2>
-              <p>
-                <p> <strong>{recipe.user.username}</strong></p>
-              </p>
-              <ReactMarkdown>{recipe.instructions}</ReactMarkdown>
+              <h2><Tickets tickets={tickets} /></h2>
             </Box>
-          </Recipe>
+          </Ticket>
         ))
       ) : (
         <>
@@ -43,7 +58,7 @@ const Wrapper = styled.section`
   max-width: 40%;
 `;
 
-const Recipe = styled.article`
+const Ticket = styled.article`
 margin-top: 20px;  
 margin-bottom: 24px;
 margin-left: 20px;

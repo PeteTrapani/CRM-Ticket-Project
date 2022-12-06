@@ -3,9 +3,10 @@ import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import TicketList from "../pages/TicketList";
-import NewRecipe from "../pages/NewTicket";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AdminLoginForm from "./AdminLoginForm";
+import NewTicket from "../pages/NewTicket";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,7 +28,7 @@ function App() {
       <main>
         <Switch>
           <Route path="/new">
-            <NewRecipe user={user} />
+            <NewTicket user={user} />
           </Route>
           <Route path="/">
             <TicketList />

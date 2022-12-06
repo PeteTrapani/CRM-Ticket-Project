@@ -5,5 +5,6 @@ import Input from "./Input";
 import Label from "./Label";
 import TextArea from "./TextArea";
 import Error from "./Error";
+import Header from "./StyledHeader";
 
-export { Box, Button, Error, FormField, Input, Label, TextArea };
+export { Box, Button, Error, FormField, Input, Label, TextArea, Header };

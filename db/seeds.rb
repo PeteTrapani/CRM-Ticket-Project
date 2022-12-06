@@ -7,17 +7,17 @@
 #   Character.create(name: "Luke", movie: movies.first)
 puts "Seeding :]"
 
-Recipe.create(
+Ticket.create(
     title: "Password Reset",
-    instructions: "Plz reset my password",
+    issues: "Plz reset my password",
 )
-Recipe.create(
+Ticket.create(
     title: "Production access",
-    instructions: "give me access to production so I can push my code!",
+    issues: "give me access to production so I can push my code!",
 )
-Recipe.create(
+Ticket.create(
     title: "DommiTummy is down!",
-    instructions: "Clients are not able to access the website after signing up.",
+    issues: "Clients are not able to access the website after signing up.",
 )
 
 puts "Done Seeding <3"

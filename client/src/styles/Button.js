@@ -2,13 +2,17 @@ import styled from "styled-components";
 
 const COLORS = {
   primary: {
-    "--main": "blue",
+    "--main": "grey",
     "--accent": "white",
   },
   secondary: {
-    "--main": "orange",
-    "--accent": "black",
+    "--main": "blue",
+    "--accent": "white",
   },
+  third: {
+    "--main": "green",
+    "--accent": "white",
+  }
 };
 
 function Button({ variant = "fill", color = "primary", ...props }) {
