@@ -1,7 +1,6 @@
 class User < ApplicationRecord
-    has_many :tickets
-    
-    has_secure_password
-  
-    validates :username, presence: true, uniqueness: true
-  end
+  has_many :tickets
+  has_many :productions, through: :tickets
+
+  has_secure_password
+end

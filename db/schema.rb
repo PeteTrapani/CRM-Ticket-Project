@@ -10,25 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_171736) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "tickets", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "title"
-    t.text "issues"
+ActiveRecord::Schema[7.0].define(version: 2022_12_07_034733) do
+  create_table "cast_members", force: :cascade do |t|
+    t.string "name"
+    t.string "role"
+    t.integer "production_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["production_id"], name: "index_cast_members_on_production_id"
+  end
+
+  create_table "productions", force: :cascade do |t|
+    t.string "title"
+    t.string "genre"
+    t.text "description"
+    t.float "budget"
+    t.string "image"
+    t.string "director"
+    t.boolean "ongoing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.integer "production_id", null: false
+    t.integer "user_id", null: false
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["production_id"], name: "index_tickets_on_production_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
+    t.string "name"
+    t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cast_members", "productions"
+  add_foreign_key "tickets", "productions"
   add_foreign_key "tickets", "users"
 end

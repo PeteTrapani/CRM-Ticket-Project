@@ -1,4 +1,4 @@
-class RecipeSerializer < ActiveModel::Serializer
-    attributes :id, :title, :issues
-    has_one :user
-  end
+class TicketSerializer < ActiveModel::Serializer
+  attributes :id
+  has_many :users
+end

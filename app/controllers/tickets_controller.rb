@@ -1,18 +1,12 @@
 class TicketsController < ApplicationController
-  
-    def index
-      render json: Ticket.all
-    end
-  
+
     def create
-      ticket = @current_user.tickets.create!(ticket_params)
-      render json: ticket, status: :created
-    end
-  
+        ticket = Ticket.create(ticket_params)
+        render json: ticket, status: :created
+    end 
     private
-  
+
     def ticket_params
-      params.permit(:title, :issues)
-    end
-  
-  end
+        params.permit(:production_id, :user_id, :price)
+    end 
+end
